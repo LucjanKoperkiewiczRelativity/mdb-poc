@@ -6,6 +6,9 @@
   <h1>${message}</h1>
 
   <input type="file" accept=".mdb" change.trigger="onFileSelected($event)">
+  <br/><br/>
+  Row limit: <input type="number" value.bind="rowLimit">
+  <br/><br/>
   <button click.trigger="reread()">Read again</button>
 
   <br/><br/>

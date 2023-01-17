@@ -6,6 +6,7 @@ export class App {
   public message = 'MDB Reader PoC';
   private file: File;
   @bindable() public tables: TableData[] = [];
+  @bindable() rowLimit = 100;
 
   async onFileSelected(event: Event): Promise<void> {
     const target = event.target as HTMLInputElement;
@@ -30,7 +31,11 @@ export class App {
     tableNames.forEach((tableName, i) => {
         const table = new TableData();
         table.name = tableName;
-        table.data = reader.getTable(tableName).getData();
+        table.data = reader
+          .getTable(tableName)
+          .getData({
+              rowLimit: this.rowLimit
+          });
 
         tables[i] = table;
     });
