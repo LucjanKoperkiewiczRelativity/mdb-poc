@@ -14,7 +14,8 @@ export class App {
 		const target = event.target as HTMLInputElement;
 		const files = target.files as FileList;
 		this.file = files[0];
-		this.readFile(this.file);
+		this.columns = null;
+		await this.readFile(this.file);
 	}
 
 	async reread(): Promise<void> {
