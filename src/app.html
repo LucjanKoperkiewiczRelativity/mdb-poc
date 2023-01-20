@@ -5,13 +5,17 @@
 
   <h1>${message}</h1>
 
-  <input type="file" accept=".mdb" change.trigger="onFileSelected($event)">
+  <input type="file" accept=".mdb,.accdb" change.trigger="onFileSelected($event)">
   <br/><br/>
   Row limit: <input type="number" value.bind="rowLimit">
   <br/><br/>
   <button click.trigger="reread()">Read again</button>
+  <br/><br/>
+  <button click.trigger="readExtraColumns()">Read Extra Columns</button>
 
   <br/><br/>
+
+  <div repeat.for="column of columns">${column}</div>
 
   <div repeat.for="table of tables">
     <h2>${table.name}</h2>
