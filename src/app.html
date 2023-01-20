@@ -15,7 +15,11 @@
 
   <br/><br/>
 
-  <div repeat.for="column of columns">${column}</div>
+  <div if.bind="columns">
+    <h2>readExtraColumns() for ${this.file.name} took ${extraTime} ms.</h2>
+    <h3>Columns:</h3>
+    <div repeat.for="column of columns">${column}</div>
+  </div>
 
   <div repeat.for="table of tables">
     <h2>${table.name}</h2>

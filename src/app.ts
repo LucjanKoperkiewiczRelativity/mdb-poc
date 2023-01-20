@@ -8,6 +8,7 @@ export class App {
 	@bindable() public tables: TableData[] = [];
 	@bindable() rowLimit = 100;
 	@bindable() public columns: string[];
+	@bindable() public extraTime: number;
 
 	async onFileSelected(event: Event): Promise<void> {
 		const target = event.target as HTMLInputElement;
@@ -45,7 +46,7 @@ export class App {
 		const startTime = performance.now();
 		await this.readExtraColumnsInternal();
 		const endTime = performance.now();
-		console.log(`readExtraColumns() for ${this.file.name} took ${endTime - startTime} ms.`)
+		this.extraTime = endTime - startTime;
 	}
 
 	private async readExtraColumnsInternal (): Promise<void> {
