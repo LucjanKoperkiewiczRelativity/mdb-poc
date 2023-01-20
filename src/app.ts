@@ -57,15 +57,16 @@ export class App {
 
 	private async readExtraColumnsInternal (): Promise<void> {
 		const columnDict = {};
+		const label = 'theLabel';
 		const reader = await this.getReader(this.file);
 
 		const table = reader.getTable('export_extras');
 
 		for (let i = 0; i < table.rowCount; i += this.batchSize) {
-			const batch = table.getData({ rowOffset: i, rowLimit: this.batchSize });
+			const batch = table.getData({ rowOffset: i, rowLimit: this.batchSize, columns: [label] });
 
 			batch.forEach(row => {
-				const columnName = row['theLabel'];
+				const columnName = row[label];
 				columnDict[columnName.toString()] = columnName;
 			});
 		}
