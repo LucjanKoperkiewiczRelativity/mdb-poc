@@ -11,13 +11,15 @@
   <br/><br/>
   <button click.trigger="reread()">Read again</button>
   <br/><br/>
+  Batch size: <input type="number" value.bind="batchSize">
+  <br/><br/>
   <button click.trigger="readExtraColumns()">Read Extra Columns</button>
 
   <br/><br/>
 
   <div if.bind="columns">
-    <h2>readExtraColumns() for ${file.name} took ${extraTime} ms.</h2>
-    <h3>Columns:</h3>
+    <h2>readExtraColumns() for ${file.name} (size: ${file.size / (1024*1024)} MB) took ${extraTime} ms with batch size ${batchSize}.</h2>
+    <h3>Columns (${columns.length}):</h3>
     <div repeat.for="column of columns">${column}</div>
   </div>
 

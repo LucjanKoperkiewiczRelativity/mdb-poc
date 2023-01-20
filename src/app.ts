@@ -7,6 +7,7 @@ export class App {
 	private file: File;
 	@bindable() public tables: TableData[] = [];
 	@bindable() rowLimit = 100;
+	@bindable() batchSize = 100000;
 	@bindable() public columns: string[];
 	@bindable() public extraTime: number;
 
@@ -47,18 +48,17 @@ export class App {
 		const startTime = performance.now();
 		await this.readExtraColumnsInternal();
 		const endTime = performance.now();
-		this.extraTime = endTime - startTime;
+		this.extraTime = Math.round(endTime - startTime);
 	}
 
 	private async readExtraColumnsInternal (): Promise<void> {
 		const columnDict = {};
 		const reader = await this.getReader(this.file);
-		const batchSize = 1000;
 
 		const table = reader.getTable('export_extras');
 
-		for (let i = 0; i < table.rowCount; i += batchSize) {
-			const batch = table.getData({ rowOffset: i, rowLimit: batchSize });
+		for (let i = 0; i < table.rowCount; i += this.batchSize) {
+			const batch = table.getData({ rowOffset: i, rowLimit: this.batchSize });
 
 			batch.forEach(row => {
 				const columnName = row['theLabel'];
