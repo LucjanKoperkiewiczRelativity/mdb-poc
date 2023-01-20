@@ -7,11 +7,11 @@
 
   <input type="file" accept=".mdb,.accdb" change.trigger="onFileSelected($event)">
   <br/><br/>
-  Row limit: <input type="number" value.bind="rowLimit">
+  Row limit: <input type="number" value.bind="rowLimitBound">
   <br/><br/>
   <button click.trigger="reread()">Read again</button>
   <br/><br/>
-  Batch size: <input type="number" value.bind="batchSize">
+  Batch size: <input type="number" value.bind="batchSizeBound">
   <br/><br/>
   <button click.trigger="readExtraColumns()">Read Extra Columns</button>
 

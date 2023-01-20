@@ -6,8 +6,12 @@ export class App {
 	public message = 'MDB Reader PoC';
 	private file: File;
 	@bindable() public tables: TableData[] = [];
-	@bindable() rowLimit = 100;
-	@bindable() batchSize = 100000;
+	@bindable() rowLimitBound = 100;
+	@bindable() batchSizeBound = 100000;
+
+	get rowLimit() { return Number(this.rowLimitBound); }
+	get batchSize() { return Number(this.batchSizeBound); }
+
 	@bindable() public columns: string[];
 	@bindable() public extraTime: number;
 
